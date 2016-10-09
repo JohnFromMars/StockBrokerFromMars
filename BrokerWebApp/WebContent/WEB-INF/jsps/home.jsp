@@ -9,9 +9,28 @@
 <title>Insert title here</title>
 </head>
 <body>
-	${name}</br>
+	<form method="post" action="${pageContext.request.contextPath}/dologin">
+
+		<table>
+
+			<tr>
+				<td>username :</td>
+				<td><input name="username" type="text"> </input></td>
+			</tr>
+
+			<tr>
+				<td>password :</td>
+				<td><input name="password" type="text"> </input></td>
+			</tr>
+
+			<tr>
+				<td></td>
+				<td><input value="login" type="submit" /></td>
+			</tr>
+		</table>
+
+	</form>
 
 
-	
 </body>
 </html>
