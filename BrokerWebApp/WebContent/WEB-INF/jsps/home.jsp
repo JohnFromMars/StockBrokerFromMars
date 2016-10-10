@@ -6,30 +6,58 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Broker Home Page</title>
+<!-- Bootstrap core CSS -->
+<link
+	href="${pageContext.request.contextPath}/static/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<link
+	href="${pageContext.request.contextPath}/static/assets/css/ie10-viewport-bug-workaround.css"
+	rel="stylesheet">
+
+<!-- Custom styles for this template -->
+<link href="${pageContext.request.contextPath}/static/css/signin.css"
+	rel="stylesheet">
+
+<!-- Just for debugging purposes. Don't actually copy these 2 lines! -->
+<!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
+<script
+	src="${pageContext.request.contextPath}/static/assets/js/ie-emulation-modes-warning.js"></script>
+
+<!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+<!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
 </head>
 <body>
-	<form method="post" action="${pageContext.request.contextPath}/dologin">
+	<div class="container">
 
-		<table>
+		<form class="form-signin" method="post"
+			action="${pageContext.request.contextPath}/dologin">
+			<h2 class="form-signin-heading">Please sign in</h2>
+			<label for="username" class="sr-only">User Name</label> <input
+				name="username" type="user" id="username" class="form-control"
+				placeholder="User Name" required autofocus> <label
+				for="password" class="sr-only">Password</label> <input
+				name="password" type="password" id="password" class="form-control"
+				placeholder="Password" required>
 
-			<tr>
-				<td>username :</td>
-				<td><input name="username" type="text"> </input></td>
-			</tr>
+			<div class="checkbox">
+				<label> <input type="checkbox" value="remember-me">
+					Remember me
+				</label>
+			</div>
+			<button class="btn btn-lg btn-primary btn-block" type="submit">Sign
+				in</button>
+		</form>
 
-			<tr>
-				<td>password :</td>
-				<td><input name="password" type="text"> </input></td>
-			</tr>
-
-			<tr>
-				<td></td>
-				<td><input value="login" type="submit" /></td>
-			</tr>
-		</table>
-
-	</form>
+	</div>
+	<!-- /container -->
+	<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+	<script src="../../assets/js/ie10-viewport-bug-workaround.js"></script>
 
 
 </body>
