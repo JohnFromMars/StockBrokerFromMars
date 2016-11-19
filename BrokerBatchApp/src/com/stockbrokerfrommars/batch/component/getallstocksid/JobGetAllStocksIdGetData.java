@@ -41,7 +41,7 @@ public class JobGetAllStocksIdGetData extends BatchComponentII {
 						
 					}
 
-					System.out.println(output);
+//					System.out.println(output);
 
 				} catch (IOException e) {
 					System.out.println(data + " " + e.getMessage());
