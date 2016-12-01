@@ -41,7 +41,7 @@ public class StockInquiryComponent extends ComponentII {
 	private List<WatchingStock> watchingList;
 	private WatchingStockService watchingStockService = DatabaseUtil.getWatchingStockService();
 	private ResourceBundle resource = ResourceBundle.getBundle("com.stockbrokerfrommars.server.config.serverapp");
-	private Logger logger = LogUtil.setLogger("StockInquiryComponent", resource.getString("dev.app.log"), Logger.getLogger("StockInquiryComponent"));
+	private Logger logger = LogUtil.setLogger("StockInquiryComponent", resource.getString("sit.app.log"), Logger.getLogger("StockInquiryComponent"));
 
 	private int count = 0;
 

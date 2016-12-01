@@ -18,7 +18,7 @@ public class DecisionComponent extends BatchComponentII {
 	protected void onInit() {
 		super.onInit();
 		resource = ResourceBundle.getBundle("com.stockbrokerfrommars.server.config.serverapp");
-		logger = LogUtil.setLogger("DecisionComponent", resource.getString("dev.app.log"), Logger.getLogger("DecisionComponent"));
+		logger = LogUtil.setLogger("DecisionComponent", resource.getString("sit.app.log"), Logger.getLogger("DecisionComponent"));
 		logger.info(" ==== DecisionComponent started ====");
 	}
 

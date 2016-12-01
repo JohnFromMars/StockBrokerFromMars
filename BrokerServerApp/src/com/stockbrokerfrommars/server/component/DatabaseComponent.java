@@ -30,7 +30,7 @@ public class DatabaseComponent extends BatchComponentII {
 	protected void onInit() {
 		super.onInit();
 		resource = ResourceBundle.getBundle("com.stockbrokerfrommars.server.config.serverapp");
-		logger = LogUtil.setLogger("DatabaseComponent", resource.getString("dev.app.log"), Logger.getLogger("DatabaseComponent"));
+		logger = LogUtil.setLogger("DatabaseComponent", resource.getString("sit.app.log"), Logger.getLogger("DatabaseComponent"));
 		stockService = DatabaseUtil.getStockService();
 	}
 

@@ -16,8 +16,8 @@ import com.batchfrommars.file.LogUtil;
 import com.stockbrokerfrommars.batch.bean.TwseUrlData;
 
 public class StepGetStocksId extends BatchComponentII {
-	private ResourceBundle resource = ResourceBundle.getBundle("com.stockbrokerfrommars.batch.config.getAllStocksId");
-	private Logger logger = LogUtil.setLogger(getClass().getSimpleName(), resource.getString("dev.getAllStocksId.log"), Logger.getLogger(getName()));
+	private ResourceBundle resource = ResourceBundle.getBundle("com.stockbrokerfrommars.batch.config.job");
+	private Logger logger = LogUtil.setLogger(getClass().getSimpleName(), resource.getString("sit.getAllStocksId.log"), Logger.getLogger(getName()));
 	private int count = 0;
 
 	@Override

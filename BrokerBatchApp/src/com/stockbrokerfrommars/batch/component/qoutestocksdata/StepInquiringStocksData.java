@@ -19,8 +19,8 @@ import yahoofinance.YahooFinance;
 
 public class StepInquiringStocksData extends BatchComponentII {
 	private static final String ERROR_MSG = ", stock inquiring fail stock id = ";
-	private ResourceBundle resource = ResourceBundle.getBundle("com.stockbrokerfrommars.batch.config.qouteStockData");
-	private Logger logger = LogUtil.setLogger("StepInquiring", resource.getString("dev.qouteStockData.log"), Logger.getLogger("StepInquiring"));
+	private ResourceBundle resource = ResourceBundle.getBundle("com.stockbrokerfrommars.batch.config.job");
+	private Logger logger = LogUtil.setLogger("StepInquiring", resource.getString("sit.qouteStockData.log"), Logger.getLogger("StepInquiring"));
 	private StockService stockService = DbServiceFactory.getStockService();
 	private ApplicationContext context;
 	private int inputStockIdCount = 0;
