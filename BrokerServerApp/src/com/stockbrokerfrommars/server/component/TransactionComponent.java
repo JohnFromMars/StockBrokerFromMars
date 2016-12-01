@@ -4,10 +4,11 @@ import java.util.LinkedList;
 
 import com.batchfrommars.component.BatchComponentII;
 
+
 public class TransactionComponent extends BatchComponentII{
 
 	@Override
-	protected LinkedList<String> excuteProcess(LinkedList<String> arg0) {
+	protected LinkedList<String> excuteProcess(LinkedList<String> inputList) {
 		
 		return null;
 	}

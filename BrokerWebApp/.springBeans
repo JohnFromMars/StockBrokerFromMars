@@ -10,6 +10,7 @@
 		<config>WebContent/WEB-INF/broker-servlet.xml</config>
 		<config>src/com/stockbrokerfrommars/web/config/dao-context.xml</config>
 		<config>src/com/stockbrokerfrommars/web/config/service-context.xml</config>
+		<config>src/com/stockbrokerfrommars/web/config/security-contex.xml</config>
 	</configs>
 	<autoconfigs>
 	</autoconfigs>

@@ -1,14 +1,21 @@
 package com.stockbrokerfrommars.server.bean;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 
-public class WatchingStock {
+import com.batchfrommars.component.SymbolParser;
+
+public class WatchingStock extends SymbolParser {
+	public static final String IN_STOCK = "inStock";
+	public static final String OUT_STOCK = "outStock";
+
 	private String type;
 	private String stockId;
 	private BigDecimal buyingPrice;
 	private BigDecimal currentPrice;
 	private BigDecimal bestSellingPrice;
 	private BigDecimal bestBuyingPrice;
+	private BigDecimal amount;
 
 	public String getType() {
 		return type;
@@ -58,10 +65,37 @@ public class WatchingStock {
 		this.bestBuyingPrice = bestBuyingPrice;
 	}
 
+	public BigDecimal getAmount() {
+		return amount;
+	}
+
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
 	@Override
 	public String toString() {
-		return "WatchingStock [type=" + type + ", stockId=" + stockId + ", buyingPrice=" + buyingPrice + ", currentPrice=" + currentPrice + ", bestSellingPrice=" + bestSellingPrice
-				+ ", bestBuyingPrice=" + bestBuyingPrice + "]";
+		return type + "," + stockId + "," + buyingPrice + "," + currentPrice + "," + bestSellingPrice + "," + bestBuyingPrice + "," + amount;
+	}
+
+	@Override
+	protected ArrayList<String> getFields() {
+		ArrayList<String> fieldTable =new  ArrayList<>();
+		
+		fieldTable.add("type");
+		fieldTable.add("stockId");
+		fieldTable.add("buyingPrice");
+		fieldTable.add("currentPrice");
+		fieldTable.add("bestSellingPrice");
+		fieldTable.add("bestBuyingPrice");
+		fieldTable.add("amount");
+			
+		return fieldTable;
+	}
+
+	@Override
+	protected String getSymbol() {
+		return ",";
 	}
 
 }
