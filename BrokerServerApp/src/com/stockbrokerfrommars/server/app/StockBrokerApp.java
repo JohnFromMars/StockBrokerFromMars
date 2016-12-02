@@ -31,7 +31,7 @@ public class StockBrokerApp {
 	}
 
 	private static void setProperties() {
-		stockInquiry.addOutputFileInformation(dbOue, decisionQue);
+		stockInquiry.addOutputFileInformation(dbOue, decisionQue, txQue);
 
 		decision.addInputFileInformation(decisionQue);
 		decision.addOutputFileInformation(txQue);

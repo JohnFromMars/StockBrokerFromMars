@@ -25,7 +25,8 @@ import yahoofinance.YahooFinance;
 /**
  * StockInquiryComponent's job is inquiring stock price, sending update stock
  * price in database request to DatabaseComponent and sending information to
- * DecisionComponent.
+ * DecisionComponent and f it got unresolved transaction, will send a checking request 
+ * TransactionComponent
  * 
  * 
  * @author Yj
@@ -41,7 +42,8 @@ public class StockInquiryComponent extends ComponentII {
 	private List<WatchingStock> watchingList;
 	private WatchingStockService watchingStockService = DatabaseUtil.getWatchingStockService();
 	private ResourceBundle resource = ResourceBundle.getBundle("com.stockbrokerfrommars.server.config.serverapp");
-	private Logger logger = LogUtil.setLogger("StockInquiryComponent", resource.getString("sit.app.log"), Logger.getLogger("StockInquiryComponent"));
+	private Logger logger = LogUtil.setLogger("StockInquiryComponent", resource.getString("sit.app.log"),
+			Logger.getLogger("StockInquiryComponent"));
 
 	private int count = 0;
 
@@ -59,7 +61,8 @@ public class StockInquiryComponent extends ComponentII {
 	protected void act() {
 		while (isBusinessTime()) {
 			for (WatchingStock item : watchingList) {
-				inquiryStock(item);
+				//watching list process
+				inquiryWatchingStock(item);
 			}
 			// reset the watching list to get the latest watchingList
 			clearWatchingList();
@@ -83,20 +86,20 @@ public class StockInquiryComponent extends ComponentII {
 	 * 
 	 * @param item
 	 */
-	private void inquiryStock(WatchingStock item) {
+	private void inquiryWatchingStock(WatchingStock item) {
 		try {
 			Stock stock = YahooFinance.get(item.getStockId() + ".tw");
 			DatabaseOrder databaseOrder = new DatabaseOrder();
 			DecisionOrder decisionOrder = new DecisionOrder();
 
 			setDatabaseOrder(stock, databaseOrder);
-			setDecisionOrder(decisionOrder, item);
-
+			// put DatabaseOrder to DB_QUE
 			outputFileList.get(DB_QUE).writeFile(databaseOrder.toString());
-			outputFileList.get(DECISION_QUE).writeFile(decisionOrder.toString());
+			// put WatchingStock to DECISION_QUE
+			outputFileList.get(DECISION_QUE).writeFile(item.toString());
 			count++;
+			
 		} catch (IOException e) {
-			e.printStackTrace();
 			logger.warning("Inquiry Fail " + item.toString() + "\r\n" + e.getMessage());
 		}
 
@@ -122,18 +125,6 @@ public class StockInquiryComponent extends ComponentII {
 		databaseOrder.setBuyingPrice(new BigDecimal("0"));
 		databaseOrder.setSellingPrice(new BigDecimal("0"));
 		databaseOrder.setTxSeq("");
-	}
-
-	/**
-	 * set the yelgram to decision component
-	 * 
-	 * @param decisionOrder
-	 * @param watchingStock
-	 */
-	private void setDecisionOrder(DecisionOrder decisionOrder, WatchingStock watchingStock) {
-		decisionOrder.setType(DecisionOrder.WATCH_STOCK);
-		decisionOrder.setWatchingStock(watchingStock);
-
 	}
 
 	/**

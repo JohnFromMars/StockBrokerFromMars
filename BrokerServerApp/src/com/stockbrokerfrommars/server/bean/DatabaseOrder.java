@@ -16,6 +16,7 @@ import com.batchfrommars.component.SymbolParser;
 public class DatabaseOrder extends SymbolParser {
 	public static final String UPDATE_CURRENT_PRICE = "00";
 	public static final String INSERT_TX_DETAIL = "01";
+	public static final String UPDATE_TX_DETAIL = "02";
 	
 	private String operateType;
 	private String stockId;
@@ -23,7 +24,8 @@ public class DatabaseOrder extends SymbolParser {
 	private BigDecimal currentPrice;
 	private BigDecimal buyingPrice;
 	private BigDecimal sellingPrice;
-	private int amount;
+	private BigDecimal amount;
+	private boolean txStatus;
 
 	public String getOperateType() {
 		return operateType;
@@ -73,12 +75,21 @@ public class DatabaseOrder extends SymbolParser {
 		this.txSeq = txSeq;
 	}
 
-	public int getAmount() {
+	public BigDecimal getAmount() {
 		return amount;
 	}
 
-	public void setAmount(int amount) {
+	public void setAmount(BigDecimal amount) {
 		this.amount = amount;
+	}
+	
+
+	public boolean isTxStatus() {
+		return txStatus;
+	}
+
+	public void setTxStatus(boolean txStatus) {
+		this.txStatus = txStatus;
 	}
 
 	@Override
@@ -97,6 +108,7 @@ public class DatabaseOrder extends SymbolParser {
 		fieldTable.add("buyingPrice");
 		fieldTable.add("sellingPrice");
 		fieldTable.add("amount");
+		fieldTable.add("txStatus");
 
 		return fieldTable;
 	}
