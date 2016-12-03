@@ -14,7 +14,6 @@ import org.springframework.dao.DataAccessException;
 import com.batchfrommars.component.ComponentII;
 import com.batchfrommars.file.LogUtil;
 import com.stockbrokerfrommars.server.bean.DatabaseOrder;
-import com.stockbrokerfrommars.server.bean.DecisionOrder;
 import com.stockbrokerfrommars.server.bean.WatchingStock;
 import com.stockbrokerfrommars.server.service.WatchingStockService;
 import com.stockbrokerfrommars.server.util.db.DatabaseUtil;
@@ -25,8 +24,8 @@ import yahoofinance.YahooFinance;
 /**
  * StockInquiryComponent's job is inquiring stock price, sending update stock
  * price in database request to DatabaseComponent and sending information to
- * DecisionComponent and f it got unresolved transaction, will send a checking request 
- * TransactionComponent
+ * DecisionComponent and f it got unresolved transaction, will send a checking
+ * request TransactionComponent
  * 
  * 
  * @author Yj
@@ -61,7 +60,7 @@ public class StockInquiryComponent extends ComponentII {
 	protected void act() {
 		while (isBusinessTime()) {
 			for (WatchingStock item : watchingList) {
-				//watching list process
+				// watching list process
 				inquiryWatchingStock(item);
 			}
 			// reset the watching list to get the latest watchingList
@@ -90,7 +89,6 @@ public class StockInquiryComponent extends ComponentII {
 		try {
 			Stock stock = YahooFinance.get(item.getStockId() + ".tw");
 			DatabaseOrder databaseOrder = new DatabaseOrder();
-			DecisionOrder decisionOrder = new DecisionOrder();
 
 			setDatabaseOrder(stock, databaseOrder);
 			// put DatabaseOrder to DB_QUE
@@ -98,7 +96,7 @@ public class StockInquiryComponent extends ComponentII {
 			// put WatchingStock to DECISION_QUE
 			outputFileList.get(DECISION_QUE).writeFile(item.toString());
 			count++;
-			
+
 		} catch (IOException e) {
 			logger.warning("Inquiry Fail " + item.toString() + "\r\n" + e.getMessage());
 		}

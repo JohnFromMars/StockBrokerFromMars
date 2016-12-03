@@ -9,30 +9,38 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.stockbrokerfrommars.server.bean.WatchingStock;
-import com.stockbrokerfrommars.server.dao.WatchingStockDao;
+import com.stockbrokerfrommars.server.dao.InStockDao;
+import com.stockbrokerfrommars.server.dao.OutStockDao;
 
 @Service
 public class WatchingStockService {
-	private WatchingStockDao watchingStockDao;
+	private OutStockDao outStockDao;
+	private InStockDao inStockDao;
 
 	/**
 	 * get the in stock and out stock as a watching list
+	 * 
 	 * @return
 	 * @throws DataAccessException
 	 */
 	@Transactional
 	public List<WatchingStock> getWatchingStocks() throws DataAccessException {
 		List<WatchingStock> watchingStocks = new LinkedList<>();
-		
-		watchingStocks=watchingStockDao.getWatchingInStock();
-		watchingStocks.addAll(watchingStockDao.getWatchingOutStock());
-		
+
+		watchingStocks = inStockDao.getWatchingInStock();
+		watchingStocks.addAll(outStockDao.getWatchingOutStock());
+
 		return watchingStocks;
 	}
 
 	@Autowired
-	public void setWatchingStockDao(WatchingStockDao watchingStockDao) {
-		this.watchingStockDao = watchingStockDao;
+	public void setOutStockDao(OutStockDao outStockDao) {
+		this.outStockDao = outStockDao;
+	}
+
+	@Autowired
+	public void setInStockDao(InStockDao inStockDao) {
+		this.inStockDao = inStockDao;
 	}
 
 }

@@ -5,7 +5,6 @@ import java.util.ResourceBundle;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
-import com.stockbrokerfrommars.server.dao.WatchingStockDao;
 import com.stockbrokerfrommars.server.service.StockService;
 import com.stockbrokerfrommars.server.service.WatchingStockService;
 
@@ -26,8 +25,5 @@ public class DatabaseUtil {
 		return (WatchingStockService)context.getBean("watchingStockService");
 	}
 	
-	public static WatchingStockDao getWatchingStockDao(){
-		context= new ClassPathXmlApplicationContext(resource.getString("jdbc.xml"));
-		return (WatchingStockDao)context.getBean("watchingStockDao");
-	}
+	
 }
