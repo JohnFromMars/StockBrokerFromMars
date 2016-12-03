@@ -27,16 +27,16 @@ public class InStockDao {
 	 * @param stockId
 	 * @param amount
 	 */
-	public void updateInStockAmount(String stockId, BigDecimal amount) {
+	public void updateInStockAmount(String txSeq, BigDecimal amount) {
 
-		String sql = "update instock set  amount = :amount where stockId = :stockId ";
+		String sql = "update instock set  amount = :amount where txSeq = :txSeq ";
 		MapSqlParameterSource source = new MapSqlParameterSource();
 		source.addValue("amount", amount);
-		source.addValue("stockId", stockId);
+		source.addValue("txSeq", txSeq);
 
 		if (dataSource.update(sql, source) == 0) {
 			throw new EmptyResultDataAccessException(
-					"Nothing update in stock table, can't find stockId=" + source.getValue("stockId"), 3);
+					"Nothing update in stock table, can't find stockId=" + source.getValue("txSeq"), 3);
 		}
 	}
 
@@ -46,15 +46,15 @@ public class InStockDao {
 	 * @param inStock
 	 */
 	public void insertInStock(InStock inStock) {
-		String sql = "insert into instock(stockId,buyingPrice,bestSellingPrice,amount) "
-				+ "values(:stockId,:buyingPrice,:bestSellingPrice,:amount)";
+		String sql = "insert into instock(stockId,buyingPrice,bestSellingPrice,amount,txseq) "
+				+ "values(:stockId,:buyingPrice,:bestSellingPrice,:amount,:txseq)";
 
 		MapSqlParameterSource source = new MapSqlParameterSource();
 		source.addValue("buyingPrice", inStock.getBuyingPrice());
 		source.addValue("bestSellingPrice", inStock.getBestSellingPrice());
 		source.addValue("amount", inStock.getAmoount());
 		source.addValue("stockId", inStock.getStockId());
-
+		source.addValue("txseq", inStock.getTxSeq());
 		dataSource.update(sql, source);
 	}
 
@@ -65,16 +65,17 @@ public class InStockDao {
 	 */
 	public void updateInStock(InStock inStock) {
 		String sql = "update instock set buyingPrice = :buyingPrice , bestSellingPrice = :bestSellingPrice "
-				+ ", amount = :amount where stockId = :stockId ";
+				+ ", amount = :amount, txseq = :txseq where stockId = :stockId ";
 		MapSqlParameterSource source = new MapSqlParameterSource();
 		source.addValue("buyingPrice", inStock.getBuyingPrice());
 		source.addValue("bestSellingPrice", inStock.getBestSellingPrice());
 		source.addValue("amount", inStock.getAmoount());
 		source.addValue("stockId", inStock.getStockId());
-
+		source.addValue("txseq", inStock.getTxSeq());
+		
 		if (dataSource.update(sql, source) == 0) {
 			throw new EmptyResultDataAccessException(
-					"Nothing update in stock table, can't find stockId=" + source.getValue("stockId"), 3);
+					"Nothing update in stock table, can't find txSeq=" + source.getValue("stockId"), 3);
 		}
 	}
 	

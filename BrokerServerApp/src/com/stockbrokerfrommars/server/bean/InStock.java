@@ -3,11 +3,12 @@ package com.stockbrokerfrommars.server.bean;
 import java.math.BigDecimal;
 
 public class InStock {
+	private String txSeq;
 	private String stockId;
 	private BigDecimal buyingPrice;
 	private BigDecimal bestSellingPrice;
 	private BigDecimal amoount;
-
+	
 	// 應該異佳是否已賣出flag
 	public String getStockId() {
 		return stockId;
@@ -37,6 +38,15 @@ public class InStock {
 		return amoount;
 	}
 
+	
+	public String getTxSeq() {
+		return txSeq;
+	}
+
+	public void setTxSeq(String txSeq) {
+		this.txSeq = txSeq;
+	}
+
 	public void setAmoount(BigDecimal amoount) {
 		this.amoount = amoount;
 	}
@@ -44,7 +54,9 @@ public class InStock {
 	@Override
 	public String toString() {
 		return "InStock [stockId=" + stockId + ", buyingPrice=" + buyingPrice + ", bestSellingPrice=" + bestSellingPrice
-				+ ", amoount=" + amoount + "]";
+				+ ", amoount=" + amoount + ", txSeq=" + txSeq + "]";
 	}
+
+
 
 }
