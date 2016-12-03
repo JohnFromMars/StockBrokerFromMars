@@ -46,7 +46,7 @@ public class InStockDao {
 	 * @param inStock
 	 */
 	public void insertInStock(InStock inStock) {
-		String sql = "insert into stock(stockId,buyingPrice,bestSellingPrice,amount) "
+		String sql = "insert into instock(stockId,buyingPrice,bestSellingPrice,amount) "
 				+ "values(:stockId,:buyingPrice,:bestSellingPrice,:amount)";
 
 		MapSqlParameterSource source = new MapSqlParameterSource();

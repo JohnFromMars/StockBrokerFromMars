@@ -52,7 +52,7 @@ public class JobQouteStocksData {
 	}
 
 	public static void setInput() {
-		JobQouteStocksData.input = new PhysicalFile(PhysicalFile.INPUT, resource.getString("sit.qouteStockData.stocksIdData") + FILE_NAME, "UTF8", false);
+		JobQouteStocksData.input = new PhysicalFile(PhysicalFile.INPUT, resource.getString("sit.getAllStocksId.stocksIdData") + FILE_NAME, "UTF8", false);
 	}
 
 	public static void setOutput() {
