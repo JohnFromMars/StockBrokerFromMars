@@ -4,26 +4,17 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class TxDetail {
+	public static final String BUY_STOCK = "buy";
+	public static final String SELL_STOCK = "sell";
+	
 	private int txid;
 	private String type;
 	private String stockId;
 	private BigDecimal price;
-	private int amount;
+	private BigDecimal amount;
 	private Timestamp dateTime;
-	private String txseq;
-
-	public TxDetail() {
-	}
-
-	public TxDetail(int txid, String type, String stockId, BigDecimal price, int amount, Timestamp dateTime, String txseq) {
-		this.txid = txid;
-		this.type = type;
-		this.stockId = stockId;
-		this.price = price;
-		this.amount = amount;
-		this.dateTime = dateTime;
-		this.txseq = txseq;
-	}
+	private String txSeq;
+	private boolean resolved;
 
 	public int getTxid() {
 		return txid;
@@ -57,14 +48,6 @@ public class TxDetail {
 		this.price = price;
 	}
 
-	public int getAmount() {
-		return amount;
-	}
-
-	public void setAmount(int amount) {
-		this.amount = amount;
-	}
-
 	public Timestamp getDateTime() {
 		return dateTime;
 	}
@@ -73,18 +56,34 @@ public class TxDetail {
 		this.dateTime = dateTime;
 	}
 
-	public String getTxseq() {
-		return txseq;
+	public BigDecimal getAmount() {
+		return amount;
 	}
 
-	public void setTxseq(String txseq) {
-		this.txseq = txseq;
+	public void setAmount(BigDecimal amount) {
+		this.amount = amount;
+	}
+
+	public boolean isResolved() {
+		return resolved;
+	}
+
+	public void setResolved(boolean resolved) {
+		this.resolved = resolved;
+	}
+
+	public String getTxSeq() {
+		return txSeq;
+	}
+
+	public void setTxSeq(String txSeq) {
+		this.txSeq = txSeq;
 	}
 
 	@Override
 	public String toString() {
 		return "TxDetail [txid=" + txid + ", type=" + type + ", stockId=" + stockId + ", price=" + price + ", amount="
-				+ amount + ", dateTime=" + dateTime + ", txseq=" + txseq + "]";
+				+ amount + ", dateTime=" + dateTime + ", txSeq=" + txSeq + ", resolved=" + resolved + "]";
 	}
 
 }

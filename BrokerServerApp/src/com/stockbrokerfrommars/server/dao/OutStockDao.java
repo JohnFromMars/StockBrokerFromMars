@@ -84,7 +84,7 @@ public class OutStockDao {
 	 * 
 	 * @return
 	 */
-	public List<WatchingStock> getWatchingOutStock() {
+	public List<WatchingStock> getWatchingOutStocks() {
 		String sql = "SELECT outstock.stockId,outstock.bestBuyingPrice,outstock.bestSellingPrice,stockquote.price"
 				+ " FROM outstock,stockquote where outstock.stockId=stockquote.stockId";
 		MapSqlParameterSource param = new MapSqlParameterSource();

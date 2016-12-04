@@ -72,13 +72,12 @@ public class InStockDao {
 		source.addValue("amount", inStock.getAmoount());
 		source.addValue("stockId", inStock.getStockId());
 		source.addValue("txseq", inStock.getTxSeq());
-		
+
 		if (dataSource.update(sql, source) == 0) {
 			throw new EmptyResultDataAccessException(
 					"Nothing update in stock table, can't find txSeq=" + source.getValue("stockId"), 3);
 		}
 	}
-	
 
 	/**
 	 * get the stock list that customer has already bought and and waiting for
@@ -86,9 +85,10 @@ public class InStockDao {
 	 * 
 	 * @return
 	 */
-	public List<WatchingStock> getWatchingInStock() {
+	public List<WatchingStock> getWatchingInStocks() {
 		String sql = "SELECT instock.stockId,instock.buyingPrice,stockquote.price,instock.amount"
-				+ ",instock.bestSellingPrice FROM instock,stockquote where instock.stockId=stockquote.stockId;";
+				+ ",instock.bestSellingPrice FROM instock,stockquote where instock.stockId=stockquote.stockId "
+				+ "and instock.sellingTxSeq is null";
 		MapSqlParameterSource param = new MapSqlParameterSource();
 
 		List<WatchingStock> watchingStocks = dataSource.query(sql, param, new RowMapper<WatchingStock>() {
@@ -111,8 +111,19 @@ public class InStockDao {
 		return watchingStocks;
 	}
 
+	public void updateInStockSellingTxSeq(String txSeq, String sellingTxSeq) {
+		String sql = "update instock set sellingTxSeq = :sellingTxSeq where txSeq = :txSeq ";
+
+		MapSqlParameterSource source = new MapSqlParameterSource();
+		source.addValue("sellingTxSeq", sellingTxSeq);
+		source.addValue("txSeq", txSeq);
+		dataSource.update(sql, source);
+
+	}
+
 	@Autowired
 	public void setDataSource(DataSource dataSource) {
 		this.dataSource = new NamedParameterJdbcTemplate(dataSource);
 	}
+
 }

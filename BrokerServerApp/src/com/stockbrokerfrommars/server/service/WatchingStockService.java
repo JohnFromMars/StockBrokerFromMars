@@ -27,8 +27,8 @@ public class WatchingStockService {
 	public List<WatchingStock> getWatchingStocks() throws DataAccessException {
 		List<WatchingStock> watchingStocks = new LinkedList<>();
 
-		watchingStocks = inStockDao.getWatchingInStock();
-		watchingStocks.addAll(outStockDao.getWatchingOutStock());
+		watchingStocks = inStockDao.getWatchingInStocks();
+		watchingStocks.addAll(outStockDao.getWatchingOutStocks());
 
 		return watchingStocks;
 	}

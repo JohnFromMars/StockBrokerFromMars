@@ -24,6 +24,10 @@ public class InStockService {
 		inStockDao.updateInStockAmount(txSeq, amount);
 	}
 	
+	public void updateInStockSellingTxSeq(String txSeq,String sellingTxSeq){
+		inStockDao.updateInStockSellingTxSeq(txSeq,sellingTxSeq);
+	}
+	
 	@Autowired
 	public void setInStockDao(InStockDao inStockDao) {
 		this.inStockDao = inStockDao;
