@@ -48,7 +48,7 @@ public class JobGetAllStockId {
 	}
 
 	private static void setLogger() {
-		logger = LogUtil.setLogger("JobGetAllStockId", resource.getString("sit.getAllStocksId.log"), Logger.getLogger("JobGetAllStockId"));
+		logger = LogUtil.setLogger("JobGetAllStockId", resource.getString("dev.getAllStocksId.log"), Logger.getLogger("JobGetAllStockId"));
 
 	}
 
@@ -58,11 +58,11 @@ public class JobGetAllStockId {
 	}
 
 	static void setInput() {
-		input = new PhysicalFile(PhysicalFile.INPUT, resource.getString("sit.getAllStocksId.urlPath"), "UTF8", false);
+		input = new PhysicalFile(PhysicalFile.INPUT, resource.getString("dev.getAllStocksId.urlPath"), "UTF8", false);
 	}
 
 	static void setOutput() {
-		output = new PhysicalFile(PhysicalFile.OUTPUT, resource.getString("sit.getAllStocksId.stocksIdData") + "stockId.txt", "UTF8", false);
+		output = new PhysicalFile(PhysicalFile.OUTPUT, resource.getString("dev.getAllStocksId.stocksIdData") + "stockId.txt", "UTF8", false);
 	}
 
 	static void setGetDataComponent() {

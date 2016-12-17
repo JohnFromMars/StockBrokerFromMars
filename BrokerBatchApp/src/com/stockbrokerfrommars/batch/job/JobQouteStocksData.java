@@ -48,15 +48,15 @@ public class JobQouteStocksData {
 	}
 
 	public static void setLogger() {
-		JobQouteStocksData.logger = LogUtil.setLogger("JobQouteStocksData", resource.getString("sit.qouteStockData.log"), Logger.getLogger("qouteStockData"));
+		JobQouteStocksData.logger = LogUtil.setLogger("JobQouteStocksData", resource.getString("dev.qouteStockData.log"), Logger.getLogger("qouteStockData"));
 	}
 
 	public static void setInput() {
-		JobQouteStocksData.input = new PhysicalFile(PhysicalFile.INPUT, resource.getString("sit.getAllStocksId.stocksIdData") + FILE_NAME, "UTF8", false);
+		JobQouteStocksData.input = new PhysicalFile(PhysicalFile.INPUT, resource.getString("dev.getAllStocksId.stocksIdData") + FILE_NAME, "UTF8", false);
 	}
 
 	public static void setOutput() {
-		JobQouteStocksData.output = new PhysicalFile(PhysicalFile.OUTPUT, resource.getString("sit.qouteStockData.failUpdateData") + UPDATE_FAIL, "UTF8", false);
+		JobQouteStocksData.output = new PhysicalFile(PhysicalFile.OUTPUT, resource.getString("dev.qouteStockData.failUpdateData") + UPDATE_FAIL, "UTF8", false);
 	}
 
 	public static void setStepInquiring() {

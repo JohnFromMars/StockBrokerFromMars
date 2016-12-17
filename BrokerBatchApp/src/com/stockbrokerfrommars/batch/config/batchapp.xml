@@ -6,9 +6,9 @@
 
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
 		<property name="driverClassName" value="${jdbc.driver}"></property>
-		<property name="url" value="${sit.jdbc.url}"></property>
-		<property name="password" value="${sit.jdbc.password}"></property>
-		<property name="username" value="${sit.jdbc.user}"></property>
+		<property name="url" value="${dev.jdbc.url}"></property>
+		<property name="password" value="${dev.jdbc.password}"></property>
+		<property name="username" value="${dev.jdbc.user}"></property>
 	</bean>
 	
 	<bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
