@@ -4,6 +4,7 @@ import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 public class TxDetail {
+	
 	public static final String BUY_STOCK = "buy";
 	public static final String SELL_STOCK = "sell";
 	

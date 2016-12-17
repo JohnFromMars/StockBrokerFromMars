@@ -86,7 +86,7 @@ public class InStockDao {
 	 * @return
 	 */
 	public List<WatchingStock> getWatchingInStocks() {
-		String sql = "SELECT instock.stockId,instock.buyingPrice,stockquote.price,instock.amount"
+		String sql = "SELECT instock.txSeq,instock.stockId,instock.buyingPrice,stockquote.price,instock.amount"
 				+ ",instock.bestSellingPrice FROM instock,stockquote where instock.stockId=stockquote.stockId "
 				+ "and instock.sellingTxSeq is null";
 		MapSqlParameterSource param = new MapSqlParameterSource();
@@ -103,6 +103,7 @@ public class InStockDao {
 				stock.setBestSellingPrice(rs.getBigDecimal("bestSellingPrice"));
 				stock.setAmount(rs.getBigDecimal("amount"));
 				stock.setType(WatchingStock.IN_STOCK);
+				stock.setTxSeq(rs.getString("txSeq"));
 
 				return stock;
 			}

@@ -17,6 +17,7 @@ public class TransactionOrder extends SymbolParser{
 	private BigDecimal sellingPrice;
 	private BigDecimal buyingPrice;
 	
+	
 	public String getTxType() {
 		return txType;
 	}

@@ -16,6 +16,7 @@ public class WatchingStock extends SymbolParser {
 	private BigDecimal bestSellingPrice;
 	private BigDecimal bestBuyingPrice;
 	private BigDecimal amount;
+	private String txSeq;
 
 	public String getType() {
 		return type;
@@ -73,15 +74,24 @@ public class WatchingStock extends SymbolParser {
 		this.amount = amount;
 	}
 
+	public String getTxSeq() {
+		return txSeq;
+	}
+
+	public void setTxSeq(String txSeq) {
+		this.txSeq = txSeq;
+	}
+
 	@Override
 	public String toString() {
-		return type + "," + stockId + "," + buyingPrice + "," + currentPrice + "," + bestSellingPrice + "," + bestBuyingPrice + "," + amount;
+		return type + "," + stockId + "," + buyingPrice + "," + currentPrice + "," + bestSellingPrice + ","
+				+ bestBuyingPrice + "," + amount + "," + txSeq;
 	}
 
 	@Override
 	protected ArrayList<String> getFields() {
-		ArrayList<String> fieldTable =new  ArrayList<>();
-		
+		ArrayList<String> fieldTable = new ArrayList<>();
+
 		fieldTable.add("type");
 		fieldTable.add("stockId");
 		fieldTable.add("buyingPrice");
@@ -89,7 +99,8 @@ public class WatchingStock extends SymbolParser {
 		fieldTable.add("bestSellingPrice");
 		fieldTable.add("bestBuyingPrice");
 		fieldTable.add("amount");
-			
+		fieldTable.add("txSeq");
+
 		return fieldTable;
 	}
 

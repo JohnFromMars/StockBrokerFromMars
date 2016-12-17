@@ -20,9 +20,18 @@ public class TransactionService {
 	}
 
 	@Transactional
-	public void Order(String originTxSeq,TxDetail txDetail) {
-		txDetailDao.insertTxDetail(txDetail);
-		inStockDao.updateInStockSellingTxSeq(originTxSeq, txDetail.getTxSeq());
+	public void sellingOrder(String originTxSeq, TxDetail txDetail) {
+		if (txDetail.getType().equals(TxDetail.SELL_STOCK)) {
+			txDetailDao.insertTxDetail(txDetail);
+			inStockDao.updateInStockSellingTxSeq(originTxSeq, txDetail.getTxSeq());
+			
+		} else if (txDetail.getType().equals(TxDetail.BUY_STOCK)) {
+			txDetailDao.insertTxDetail(txDetail);
+		}
+	}
+
+	public void confirmOrder(String txSeq) {
+
 	}
 
 	@Autowired

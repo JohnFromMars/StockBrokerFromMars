@@ -19,6 +19,5 @@
 	<context:annotation-config></context:annotation-config>
 	<context:component-scan base-package="com.stockbrokerfrommars.server.service"></context:component-scan>
 	<context:component-scan base-package="com.stockbrokerfrommars.server.dao"></context:component-scan>
-
 	<context:property-placeholder location="/com/stockbrokerfrommars/server/config/db.properties" />
 </beans>

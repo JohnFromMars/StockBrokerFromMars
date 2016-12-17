@@ -1,7 +1,6 @@
 package com.stockbrokerfrommars.server.component;
 
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
@@ -13,8 +12,8 @@ import org.springframework.dao.DataAccessException;
 
 import com.batchfrommars.component.ComponentII;
 import com.batchfrommars.file.LogUtil;
-import com.stockbrokerfrommars.server.bean.DatabaseOrder;
 import com.stockbrokerfrommars.server.bean.WatchingStock;
+import com.stockbrokerfrommars.server.service.StockService;
 import com.stockbrokerfrommars.server.service.WatchingStockService;
 import com.stockbrokerfrommars.server.util.db.DatabaseUtil;
 
@@ -33,13 +32,13 @@ import yahoofinance.YahooFinance;
  */
 public class StockInquiryComponent extends ComponentII {
 
-	private final static int DB_QUE = 0;
-	private final static int DECISION_QUE = 1;
+	private final static int DECISION_QUE = 0;
 
 	private Date businessStartTime;
 	private Date businessEndTime;
 	private List<WatchingStock> watchingList;
 	private WatchingStockService watchingStockService = DatabaseUtil.getWatchingStockService();
+	private StockService stockService = DatabaseUtil.getStockService();
 	private ResourceBundle resource = ResourceBundle.getBundle("com.stockbrokerfrommars.server.config.serverapp");
 	private Logger logger = LogUtil.setLogger("StockInquiryComponent", resource.getString("sit.app.log"),
 			Logger.getLogger("StockInquiryComponent"));
@@ -52,6 +51,7 @@ public class StockInquiryComponent extends ComponentII {
 		logger.info("--------inquiryStock report--------");
 		setBusinessTime();
 		setWatchingList();
+
 		logger.info(watchingList.toString());
 
 	}
@@ -88,11 +88,9 @@ public class StockInquiryComponent extends ComponentII {
 	private void inquiryWatchingStock(WatchingStock item) {
 		try {
 			Stock stock = YahooFinance.get(item.getStockId() + ".tw");
-			DatabaseOrder databaseOrder = new DatabaseOrder();
 
-			setDatabaseOrder(stock, databaseOrder);
-			// put DatabaseOrder to DB_QUE
-			outputFileList.get(DB_QUE).writeFile(databaseOrder.toString());
+			updateStockPrice(stock);
+
 			// put WatchingStock to DECISION_QUE
 			outputFileList.get(DECISION_QUE).writeFile(item.toString());
 			count++;
@@ -103,26 +101,8 @@ public class StockInquiryComponent extends ComponentII {
 
 	}
 
-	/**
-	 * compose the telegram to database component
-	 * 
-	 * @param stock
-	 * @param databaseOrder
-	 */
-	private void setDatabaseOrder(Stock stock, DatabaseOrder databaseOrder) {
-
-		databaseOrder.setOperateType(DatabaseOrder.UPDATE_CURRENT_PRICE);
-		databaseOrder.setStockId(stock.getSymbol().substring(0, 4));
-
-		if (stock.getQuote().getPrice() != null) {
-			databaseOrder.setCurrentPrice(stock.getQuote().getPrice());
-		} else {
-			databaseOrder.setCurrentPrice(new BigDecimal("0"));
-		}
-
-		databaseOrder.setBuyingPrice(new BigDecimal("0"));
-		databaseOrder.setSellingPrice(new BigDecimal("0"));
-		databaseOrder.setTxSeq("");
+	private void updateStockPrice(Stock stock) {
+		stockService.updatePrice(stock.getSymbol().substring(0,4), stock.getQuote().getPrice());
 	}
 
 	/**
