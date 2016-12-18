@@ -84,14 +84,16 @@ public class StockInquiryComponent extends ComponentII {
 	 * component and decision component
 	 * 
 	 * @param item
-	 */
+	 */      
 	private void inquiryWatchingStock(WatchingStock item) {
 		try {
 			Stock stock = YahooFinance.get(item.getStockId() + ".tw");
-
+			
+			//update db stock qoute
 			updateStockPrice(stock);
 
 			// put WatchingStock to DECISION_QUE
+			logger.finest("message to DECISION_QUE = " + item.toString());
 			outputFileList.get(DECISION_QUE).writeFile(item.toString());
 			count++;
 
@@ -102,7 +104,7 @@ public class StockInquiryComponent extends ComponentII {
 	}
 
 	private void updateStockPrice(Stock stock) {
-		stockService.updatePrice(stock.getSymbol().substring(0,4), stock.getQuote().getPrice());
+		stockService.updatePrice(stock.getSymbol().substring(0, 4), stock.getQuote().getPrice());
 	}
 
 	/**
@@ -157,7 +159,7 @@ public class StockInquiryComponent extends ComponentII {
 	private void setWatchingList() {
 		try {
 			this.watchingList = watchingStockService.getWatchingStocks();
-
+			logger.info("Watching list = " + watchingList.toString());
 		} catch (DataAccessException e) {
 			logger.warning(e.getClass().getName() + ":" + e.getMessage());
 		}
